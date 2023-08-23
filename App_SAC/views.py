@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Cliente
 from django.contrib import messages
+from django.core.paginator import Paginator
 
 # Create your views here.
 def abre_index(request):
