@@ -8,10 +8,10 @@
     <title>Programação Web Back End</title>
 </head>
 <header class="login">
-    
+
     <div class="fundo_menu">
         <div class="logo_senai">
-            <a href="index.html"><img src="{% static 'imagens/logo_senai.png' %}" /></a>
+            <a href="../index.html"><img src="{% static 'imagens/logo_senai.png' %}" /></a>
         </div>
         <div class="nome_sistema">
              Programação Web Back End<br>
@@ -19,14 +19,15 @@
         </div>
         <div class="botao_login">
             <button class="btn btn_login">Login</button>
-        </div> 
+        </div>
     </div>
-</header> 
+</header>
 
 
 
 <nav class="menu">
     <ul>
+        {% if user.is_authenticated %}
         <li><a href="">Cadastros</a>
             <ul>
                 <li><a href="Cad_Cliente.html">Clientes</a></li>
@@ -34,7 +35,7 @@
                 <li><a href="Cad_Atendente.html">Atendentes</a></li>
                 <li><a href="Cad_Situacao.html">Situações</a></li>
             </ul>
-        </li>   
+        </li>
         <li><a href="">Consultar</a>
             <ul>
                 <li><a href="Cons_Cliente.html">Clientes</a></li>
@@ -42,23 +43,24 @@
                 <li><a href="Cons_Atendente.html">Atendentes</a></li>
                 <li><a href="Cons_Situacao.html">Situações</a></li>
             </ul>
-        </li>    
+        </li>
         <li><a href="Registrar.html">Registrar Atendimento</a></li>
         <li><a href="Consultar.html">Consultar Atendimento</a></li>
         <li><a href="Relatorios.html">Relatórios</a></li>
-    </ul> 
-</nav>      
+        {% endif %}
+    </ul>
+</nav>
 <body>
     <div class="principal">
     <div class="container">
-        
+
         <section class="enquadramento">
             <h1> Login de Usuário</h1>
         </section>
 
-        
+
             <p style="border: solid; border-color: red; text-align: center;"> Usuário e/ou Senha ínválidos. <br> Por favor tente novamente.</p>
-        
+
 
         <form id="form" class="form" method="POST" action="{% url 'login' %}">{% csrf_token %}
 

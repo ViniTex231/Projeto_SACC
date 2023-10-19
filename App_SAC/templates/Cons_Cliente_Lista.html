@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <link rel="stylesheet" type="text/css" href="{% static 'css/Cons_Cliente_Lista.css' %}">
     <title>Document</title>
 </head>
@@ -25,18 +26,28 @@
 
 <nav class="menu">
     <ul>
-        <li><a href="Cadastros">Cadastros</a>
+        {% if user.is_authenticated %}
+        <li><a href="">Cadastros</a>
             <ul>
-                <li><a href="Cad_Cliente.html">Clientes</a></li>
-                <li><a href="Departamentos">Departamentos</a></li>
-                <li><a href="Atendentes">Atendentes</a></li>
-                <li><a href="Situações">Situações</a></li>
+                <li><a href="{% url 'cad_cliente' %}">Clientes</a></li>
+                <li><a href="{% url 'cad_depto' %}">Departamentos</a></li>
+                <li><a href="{% url 'cad_atend' %}">Atendentes</a></li>
+                <li><a href="{% url 'cad_situacao' %}">Situações</a></li>
+            </ul>
+        </li>   
+        <li><a href="">Consultar</a>
+            <ul>
+                <li><a href="{% url 'cons_cliente' %}">Clientes</a></li>
+                <li><a href="{% url 'cons_depto' %}">Departamentos</a></li>
+                <li><a href="{% url 'cons_atend' %}">Atendentes</a></li>
+                <li><a href="{% url 'cons_situacao' %}">Situações</a></li>
             </ul>
         </li>    
-        <li><a href="Registrar">Registrar Atendimento</a></li>
-        <li><a href="Consultar">Consultar Atendimento</a></li>
-        <li><a href="Relatorios">Relatórios</a></li>
-        <li><a href="TESTE.html">TESTES</a></li>
+        <li><a href="Registrar.html">Registrar Atendimento</a></li>
+        <li><a href="Consultar.html">Consultar Atendimento</a></li>
+        <li><a href="Relatorios.html">Relatórios</a></li>
+        <li> | Usuário logado: {{usuario_logado}}</li>
+        {% endif %}
     </ul> 
 </nav> 
      
@@ -91,17 +102,25 @@
                 </div>
         </form>
         <hr>
+
         {% if dados_clientes.has_previous %}
-            <a href="?page={{dados_clientes.previous_page_number}}&dado_pesquisa={{dado_pesquisa}}"><i class="fas fa-arrow-left"></i></a>
+            <a href="?page{{dados_clientes.previous_page_number}}&dado_pesquisa={{dado_pesquisa}}">
+                <i class="fas fa-arrow-left"></i>
+            </a>
         {% endif %}
 
         <span>
-            {{dados_clientes.number}} de {{dados_clientes.paginator.num_pages}}
+            {{ dados_clientes.number }} de {{ dados_clientes.paginator.num_pages }}
         </span>
 
         {% if dados_clientes.has_next %}
-            <a href="?page={{dados_clientes.next_page_number}}&dado_pesquisa={{dado_pesquisa}}"><i class="fas fa-arrow-right"></i></a>
+            <a href="?page{{dados_clientes.next_page_number}}&dado_pesquisa={{dado_pesquisa}}">
+                <i class="fas fa-arrow-right"></i>
+            </a>
         {% endif %}
+
+
+
 
         <table>
             <tr>
